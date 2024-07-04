@@ -1,0 +1,38 @@
+#auto-slug {
+  cursor: pointer;
+}
+
+.text-12 {
+  font-size: 13px;
+}
+
+/* Menu tài khoản admin */
+.dropdown-menu-lg {
+  max-width: 300px;
+  min-width: auto;
+  padding: 0;
+}
+
+/* Nút tìm kiếm */
+.btn-search {
+  border: 1px solid #ccc;
+}
+/* Cloé icon */
+.close-icon {
+	display: flex;
+	align-items: center;
+	justify-content: end;
+}
+
+.close-icon i {
+  border: 1px solid transparent;
+}
+
+.close-icon i:hover {
+  color: red;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid red;
+  border-radius: 3px;
+}
+
