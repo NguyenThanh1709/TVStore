@@ -25,6 +25,7 @@
 
   <!-- Bootstrap Css -->
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE ?>/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- Font Awesome CSS -->
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE ?>/css/font-awesome.min.css">
   <!-- Slick Nav CSS -->
@@ -53,10 +54,14 @@
   <!-- Radix Color CSS -->
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE ?>/css/color/color2.css">
   <link rel="stylesheet" href="#" id="colors">
+  <!-- Toast Jquey CSS CDN-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
-
   <!-- Preloader -->
   <div class="preloader">
     <div class="preloader-inner">
@@ -158,23 +163,22 @@
             <div class="mainmenu">
               <nav class="navigation">
                 <ul class="nav menu">
-                  <li class="active"><a href="<?php echo _WEB_HOST_ROOT ?>">Home</a></li>
-                  <li><a href="#">Pages<i class="fa fa-caret-down"></i></a>
+                  <li class="active"><a href="<?php echo _WEB_HOST_ROOT ?>">Trang chủ</a></li>
+                  <li><a href="#">Trang<i class="fa fa-caret-down"></i></a>
                     <ul class="dropdown">
-                      <li><a href="?module=page-template&action=about">About Us</a></li>
-                      <li><a href="?module=page-template&action=team">Our Team</a></li>
-                      <li><a href="pricing.html">Pricing</a></li>
+                      <li><a href="?module=page-template&action=about">Giới thiệu</a></li>
+                      <li><a href="?module=page-template&action=team">Đội ngũ</a></li>
                     </ul>
                   </li>
-                  <li><a href="services.html">Services</a></li>
-                  <li><a href="portfolio.html">Portfolio</a></li>
-                  <li><a href="#">Blogs<i class="fa fa-caret-down"></i></a>
-                    <ul class="dropdown">
+                  <li><a href="?module=services">Dịch vụ</a></li>
+                  <li><a href="?module=portfolios">Dự án</a></li>
+                  <li><a href="?module=blogs">Bài viết</a>
+                    <!-- <ul class="dropdown">
                       <li><a href="blog.html">Blog layout</a></li>
                       <li><a href="blog-single.html">Blog Single</a></li>
-                    </ul>
+                    </ul> -->
                   </li>
-                  <li><a href="contact.html">Contact</a></li>
+                  <li><a href="?module=page-template&action=contact">Liên hệ</a></li>
                 </ul>
               </nav>
               <!-- Button -->

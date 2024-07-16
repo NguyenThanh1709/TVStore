@@ -44,7 +44,7 @@ function update($table, $dataUpdate, $condition = '')
   } else {
     $sql = "UPDATE $table SET $updateStr WHERE $condition";
   }
-  // echo $sql . "<br>";
+  // die($sql);
   return query($sql, $dataUpdate);
 }
 

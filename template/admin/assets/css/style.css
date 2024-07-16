@@ -36,3 +36,54 @@
   border-radius: 3px;
 }
 
+.wp-status {
+	position: relative;
+}
+
+.noti-success {
+	position: absolute;
+  width: 100px;
+  top: -10px;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left: 5px solid #28a745;
+  animation: notiAnimation ease-in-out 0.25s;
+  display: none;
+  transition: all linear 0.25s;
+}
+
+.noti-success i {
+  padding: 4px 2px;
+  color: #28a745;
+}
+
+.noti-hide {
+  position: absolute;
+  width: 100px;
+  top: -10px;
+  left: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left: 5px solid red;
+  animation: notiAnimation ease-in-out 0.25s;
+  display: none;
+  transition: all linear 0.25s;
+}
+
+.noti-hide i {
+  padding: 4px 2px;
+  color: red;
+}
+
+@keyframes notiAnimation {
+  from {
+    top: 40%;
+    opacity: 0;
+  }
+  to {
+    top: -10px;
+    opacity: 1;
+  }
+}
+

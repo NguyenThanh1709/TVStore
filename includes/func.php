@@ -171,9 +171,9 @@ function getMsg($msg, $style = 'success')
   if (!empty($msg)) {
     echo "<div class='alert alert-$style alert-dismissible fade show' role='alert'>";
     echo $msg;
-    echo "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>";
+    echo "<div type='button' class='close' data-dismiss='alert' aria-label='Close'>";
     echo "<span aria-hidden='true'>&times;</span>";
-    echo "</button>";
+    echo "</div>";
     echo "</div>";
   }
 }
@@ -406,6 +406,152 @@ function formatDate($date, $dmy = '', $him = '')
   $dateTime = new DateTime($date);
   if (empty($him)) {
     return $dateTime->format('d/m/Y');
+  } else {
+    return $dateTime->format('H:i:s');
   }
   return $dateTime->format('d/m/Y H:i:s');
+}
+
+function getYoutobeID($url)
+{
+  $result = array();
+
+  $urlStr = parse_url($url, PHP_URL_QUERY);
+
+  parse_str($urlStr, $result);
+
+  if (!empty($result['v'])) {
+    return $result['v'];
+  }
+  return false;
+}
+
+function getLimitText($content, $limit = 20)
+{
+  $content = strip_tags($content); //Loại bỏ tất cả ký tự thẻ
+  $content = trim($content); //Loại bỏ khoảng trắng
+  $contentArr = explode(' ', $content);
+  $contentArr = array_filter($contentArr);
+  $worksNumber = count($contentArr); //Trả về số lượng phần tử mảng
+  if ($worksNumber > $limit) {
+    $contentArrLimit = explode(' ', $content, $limit + 1);
+    array_pop($contentArrLimit);
+
+    $limitText = implode(' ', $contentArrLimit) . '...';
+    return $limitText;
+  }
+  return $content;
+}
+
+function setView($slug)
+{
+  $blog = firstRaw("SELECT view_count FROM `blog` WHERE `slug`='$slug'");
+
+  $check = false;
+  if (!empty($blog)) {
+    $view = $blog['view_count'];
+    $view++;
+    $check = true;
+  } else {
+    if (is_array($blog)) {
+      $view = 1;
+    }
+  }
+  if ($check) {
+    $dataUpdate = array(
+      'view_count' => $view
+    );
+    $condition = "slug='$slug'";
+    update('blog', $dataUpdate, $condition);
+  }
+}
+
+function getRealIPAddress()
+{
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    //check ip from share internet
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  } else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    //to check ip is pass from proxy
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  } else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+  return $ip;
+}
+
+function getCommentList($commentData, $parentId)
+{
+  if (!empty($commentData)) {
+    echo "<div class='comment-children'>";
+    foreach ($commentData as $item) {
+      if ($item['parent_id'] == $parentId) {
+?>
+        <div class="comment-list comment-list-<?php echo $item['id'] ?>">
+          <div class="main">
+            <div class="head">
+              <img src="<?php echo _WEB_HOST_TEMPLATE ?>/images/avt-123.jpg" alt="#">
+            </div>
+            <div class="body body-comment">
+              <h5 class="text-15 name-<?php echo $item['id'] ?>">
+                <?php echo !empty($item) ? $item['name'] : false; ?>
+                <?php echo !empty($item['user_id']) ? userDetail($item['user_id'])['fullname'] . ' <span class="badge badge-warning">(Quản trị viên)</span>' : false; ?></h5>
+              <div class="comment-info">
+                <p><span><?php echo !empty($item) ? formatDate($item['create_at'], 'dmy') : false; ?><i class="fa fa-clock-o"></i> vào lúc <?php echo !empty($item) ? formatDate($item['create_at'], '', 'his') : false; ?></span><a href="#" class="reply" data-id="<?php echo $item['id'] ?>"><i class="fa fa-comment-o"></i>Trả lời</a></p>
+              </div>
+              <p><?php echo !empty($item['content']) ? $item['content'] : false; ?></p>
+
+              <i class="fa fa-ellipsis-h custom-icon"></i>
+              <ul class="list-menu">
+                <li class="reply" data-id="<?php echo $item['id'] ?>"><a href=""><i class="fa fa-comment-o"></i> Trả lời</a></li>
+                <li><a href=""><i class="fa fa-trash"></i> Xoá</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="reply-comment-form-<?php echo $item['id'] ?>" data-id="<?php echo $item['id'] ?>">
+          </div>
+
+          <?php getCommentList($commentData, $item['id']); ?>
+        </div>
+<?php
+      }
+    }
+    echo "</div>";
+  }
+}
+
+function getComment($parent_id)
+{
+  $comment = firstRaw("SELECT * FROM `comment` WHERE `id` = '$parent_id'");
+  if (!empty($comment)) {
+    return $comment;
+  }
+}
+
+
+function getCommentReply($commentData, $parent_id, &$result = [])
+{
+  if (!empty($commentData)) {
+    foreach ($commentData as $key => $item) {
+      if ($parent_id == $item['parent_id']) {
+        $result[] = $item['id'];
+        getCommentReply($commentData, $item['id'], $result);
+        unset($commentData[$key]);
+      }
+    }
+  }
+  return $result;
+}
+
+function getCommentCountStatus($status = 0)
+{
+  $sql = "SELECT id FROM `comment` WHERE `status`= $status";
+  return getRows($sql);
+}
+
+function getContactType($type_id)
+{
+  $sql = "SELECT * FROM `contact_type` WHERE `id`= $type_id";
+  return firstRaw($sql);
 }

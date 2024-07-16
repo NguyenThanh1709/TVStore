@@ -1,4 +1,81 @@
 // File js
+
+// Duyệt bình luận noti
+$(document).ready(function () {
+  $(document).on("click", ".btn-status", function () {
+    let data_id = $(this).data("id");
+    let $button = $(this); // Lưu trữ tham chiếu tới nút đã được click
+    $(".noti-success-" + data_id).css("display", "block");
+    setTimeout(function () {
+      $(".noti-success-" + data_id).css("display", "none");
+    }, 1000);
+
+    //truyền dữ liệu qua ajax cập nhật bình luận
+    $.ajax({
+      url: "?module=comments&action=server",
+      method: "POST",
+      data: { data_id: data_id, action: "show" },
+      dataType: "json",
+      success: function (response) {
+        console.log(response);
+        $button.removeClass("btn-warning");
+        $button.removeClass("btn-status");
+        $button.removeAttr("data-id");
+        $button.addClass("btn-success");
+        $button.html("<i class='fa fa-check'></i> Đã duyệt");
+        // Thêm nút 'Ẩn' vào DOM ngay sau nút 'Đã duyệt'
+        $button.after(
+          ` <span class='btn btn-sm btn-danger btn-hide' data-id=${response.data_id}><i class='fa fa-eye-slash'></i> Ẩn</span>`
+        );
+        $(".number-status-comment").text(response.countStatus);
+        // console.log(response);
+      },
+      error: function (error) {
+        console.error("Error:", error); // Log any error to the console
+        $("#loading").removeClass("spinner-border spinner-border-sm");
+        $("#btn-comment").attr("disabled", false);
+      },
+    });
+  });
+
+  // Trình xử lý sự kiện cho nút Ẩn
+  $(document).on("click", ".btn-hide", function () {
+    let data_id = $(this).data("id");
+    let $button = $(this); // Lưu trữ tham chiếu tới nút đã được click
+    $(".noti-hide-" + data_id).css("display", "block");
+    setTimeout(function () {
+      $(".noti-hide-" + data_id).css("display", "none");
+    }, 1000);
+
+    //truyền dữ liệu qua ajax cập nhật bình luận
+    $.ajax({
+      url: "?module=comments&action=server",
+      method: "POST",
+      data: { data_id: data_id, action: "hide" },
+      dataType: "json",
+      success: function (response) {
+        // Ẩn nút 'Đã duyệt' và nút 'Ẩn'
+        $button.prev(".btn-success").remove();
+        $button.remove();
+
+        // Hiển thị lại nút 'Hiển thị'
+        $(".noti-success-" + data_id).before(
+          "<span class='btn btn-sm btn-warning btn-status' data-id='" +
+            data_id +
+            "'><i class='fa fa-eye'></i> Hiển thị</span>"
+        );
+        $(".number-status-comment").text(response.countStatus);
+        // console.log(response);
+      },
+      error: function (error) {
+        console.error("Error:", error); // Log any error to the console
+        $("#loading").removeClass("spinner-border spinner-border-sm");
+        $("#btn-comment").attr("disabled", false);
+      },
+    });
+  });
+});
+
 //Hàm chuyển đổi slug
 function convertToSlug(str) {
   // Chuyển hết sang chữ thường
@@ -346,8 +423,139 @@ function addItemSkill() {
   });
 }
 
+function addItemTeam() {
+  // alert("OKE");
+  $(".btn-add-team").on("click", function () {
+    let str = `<hr>
+    <div class="team-item">
+              <div class="row">
+             
+                <div class="col-12">
+                  <div class="close-icon">
+                    <i class="fa fa-times p-2"></i>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Tên</label>
+                    <input type="text" class="form-control" name="team_list[name][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Tên chức vụ</label>
+                    <input type="text" class="form-control" name="team_list[position][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group ">
+                    <label for="">Hình ảnh</label>
+                    <div class="row">
+                      <div class="col-10">
+                        <input type="text" readonly class="form-control thumbnail" value="" name="team_list[image][]" placeholder="Nhập ảnh nền....">
+                      </div>
+                      <div class="col-2">
+                        <button type="button" class="btn btn-success choose-image w-100"><i class="fa fa-upload"></i></button>
+                      </div>
+                    </div>
+                    <?php echo form_error('image', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Facebook</label>
+                    <input type="text" class="form-control" name="team_list[facebook][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">X</label>
+                    <input type="text" class="form-control" name="team_list[x][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Linkedin</label>
+                    <input type="text" class="form-control" name="team_list[linkedin][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Zalo</label>
+                    <input type="text" class="form-control" name="team_list[zalo][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">Behance</label>
+                    <input type="text" class="form-control" name="team_list[behance][]" placeholder="Tên đội ngũ... " value="">
+                    <?php echo form_error('title_slider', $error); ?>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+
+    $(".team-wrapper").append(str);
+    $(".close-icon i")
+      .off("click")
+      .on("click", function () {
+        console.log("oke");
+        if (confirm("Bạn có chắc chắn muốn xóa không?")) {
+          $(this).closest(".team-item").remove(); // Tìm đến thẻ cha gần nhất có class row và xóa nó
+        }
+      });
+
+    $(".ranger").ionRangeSlider({
+      min: 0,
+      max: 100,
+      type: "single",
+      step: 1,
+      postfix: "%",
+      prettify: false,
+      hasGrid: true,
+    });
+
+    $(document).ready(function () {
+      $(".choose-image")
+        .off("click") //Loại bỏ sự kiện click trước đó
+        .on("click", function () {
+          console.log("OKE");
+          let inputField = $(this).closest(".row").find(".thumbnail");
+          console.log(inputField);
+          CKFinder.popup({
+            chooseFiles: true,
+            width: 800,
+            height: 600,
+            onInit: function (finder) {
+              finder.on("files:choose", function (evt) {
+                let fileUrl = evt.data.files.first().getUrl();
+                // Xử lý chèn link ảnh vào input của dòng hiện tại
+                inputField.val(fileUrl);
+                // console.log(fileUrl);
+              });
+              finder.on("file:choose:resizedImage", function (evt) {
+                let fileUrl = evt.data.resizedUrl;
+                // Xử lý chèn link ảnh vào input của dòng hiện tại
+                inputField.val(fileUrl);
+                // console.log(fileUrl);
+              });
+            },
+          });
+        });
+    });
+  });
+}
+
 $(document).ready(function () {
   addItemPartNer();
+
+  addItemTeam();
 
   addItemSkill();
   //Ranger skill
@@ -363,6 +571,7 @@ $(document).ready(function () {
         $(this).closest(".wp-item-slider").remove(); // Tìm đến thẻ cha gần nhất có class row và xóa nó
         $(this).closest(".skill-item").remove(); // Tìm đến thẻ cha gần nhất có class row và xóa nó
         $(this).closest(".partner-item").remove(); // Tìm đến thẻ cha gần nhất có class row và xóa nó
+        $(this).closest(".team-item").remove(); // Tìm đến thẻ cha gần nhất có class row và xóa nó
       }
     });
 
@@ -472,3 +681,22 @@ $(".ranger").ionRangeSlider({
   prettify: false,
   hasGrid: true,
 });
+
+function callCommentStatus() {
+  //truyền dữ liệu qua ajax cập nhật bình luận
+  $.ajax({
+    url: "?module=comments&action=server",
+    method: "GET",
+    dataType: "json",
+    success: function (response) {
+      $(".number-status-comment").text(response.countStatus);
+    },
+    error: function (error) {
+      console.error("Error:", error); // Log any error to the console
+      $("#loading").removeClass("spinner-border spinner-border-sm");
+      $("#btn-comment").attr("disabled", false);
+    },
+  });
+}
+
+setInterval(callCommentStatus, 15000);

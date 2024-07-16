@@ -5,9 +5,9 @@ $userDetail = userDetail($userID);
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="<?php echo _WEB_HOST_ROOT_ADMIN ?>" class="brand-link">
-    <img src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light"><?php echo _NAME_PROJECT ?></span>
+  <a href="<?php echo _WEB_HOST_ROOT_ADMIN ?>" class="brand-link text-center">
+    <!-- <img src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
+    <span class="brand-text font-weight-bold"><?php echo "ADMIN " . _NAME_PROJECT ?></span>
   </a>
   <!-- Sidebar -->
   <div class="sidebar">
@@ -33,6 +33,7 @@ $userDetail = userDetail($userID);
             </p>
           </a>
         </li>
+
         <!-- Blog -->
         <li class="nav-item has-treeview <?php echo activeMenuSidebar('blogs') ? 'menu-open' : false; ?><?php echo activeMenuSidebar('blog_categories') ? 'menu-open' : false; ?>">
           <a href="<?php echo getLinkAdmin('blogs') ?>" class="nav-link <?php echo activeMenuSidebar('blogs') ? 'active' : false; ?> <?php echo activeMenuSidebar('blog_categories') ? 'active' : false; ?>">
@@ -65,6 +66,7 @@ $userDetail = userDetail($userID);
           </ul>
         </li>
         <!-- End - blog -->
+
         <!-- Contacts -->
         <li class="nav-item has-treeview <?php echo activeMenuSidebar('contacts') ? 'menu-open' : false; ?>">
           <a href="<?php echo getLinkAdmin('contacts') ?>" class="nav-link <?php echo activeMenuSidebar('contacts') ? 'active' : false; ?>">
@@ -91,6 +93,26 @@ $userDetail = userDetail($userID);
           </ul>
         </li>
         <!-- End contact -->
+        <!-- Comments -->
+        <li class="nav-item has-treeview <?php echo activeMenuSidebar('comments') ? 'menu-open' : false; ?>">
+          <a href="<?php echo getLinkAdmin('comments') ?>" class="nav-link <?php echo activeMenuSidebar('comments') ? 'active' : false; ?>">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Quản lý bình luận
+              <i class="fas fa-angle-left right"></i>
+              <span class="number-status-comment badge badge-danger right"><?php echo getCommentCountStatus(); ?></span>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('comments') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- End comments -->
         <!-- Portfolio_categories -->
         <li class="nav-item has-treeview <?php echo activeMenuSidebar('portfolio_categories') ? 'menu-open' : false; ?><?php echo activeMenuSidebar('portfolios') ? 'menu-open' : false; ?>">
           <a href="<?php echo getLinkAdmin('portfolio_categories') ?>" class="nav-link <?php echo activeMenuSidebar('portfolio_categories') ? 'active' : false; ?><?php echo activeMenuSidebar('portfolios') ? 'active' : false; ?>">
@@ -267,10 +289,38 @@ $userDetail = userDetail($userID);
                 <p>Thiết lập trang giới thiệu</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'team') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập trang team</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'services') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập trang dịch vụ</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'portfolio') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập trang dự án</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'blogs') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập trang bài viết</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'contact') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập trang liên hệ</p>
+              </a>
+            </li>
           </ul>
         </li>
-
-
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

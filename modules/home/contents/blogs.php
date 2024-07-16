@@ -7,7 +7,7 @@ $blogs = getRaw("SELECT `blog`.*,`blog_categories`.`name` as nameCat FROM `blog`
 
 ?>
 <!-- Blogs Area -->
-<section class="blogs-main section">
+<section class="blogs-main archives section">
   <div class="container">
     <div class="row">
       <div class="col-12 wow fadeInUp">

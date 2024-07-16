@@ -153,6 +153,15 @@ $contentCol_3 = getOptions('footer_content_3');
 <script src="<?php echo _WEB_HOST_TEMPLATE ?>/js/gmap.min.js"></script>
 <!-- Main JS -->
 <script src="<?php echo _WEB_HOST_TEMPLATE ?>/js/main.js"></script>
+<script src="<?php echo _WEB_HOST_TEMPLATE ?>/js/custom.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Toast Jquery CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.2/dist/sweetalert2.all.min.js"></script>
+
+
 </body>
 
 </html>

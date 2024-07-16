@@ -262,7 +262,9 @@ $linkUrl = _WEB_HOST_ROOT . '/' . getPremaLink(getBody()['module']) . '/' . old(
                 <label for="">Hình ảnh đại diện</label>
                 <div class="row">
                   <div class="card ml-2" style="width: 18rem;">
-                    <img src="<?php echo $oldData['thumbnail'] ?>" title="Ảnh đã tải lên" alt="Ảnh tải lên" class="img-thumbnail">
+                    <a data-fancybox="gallery">
+                      <img src="<?php echo $oldData['thumbnail'] ?>" title="Ảnh đã tải lên" alt="Ảnh tải lên" class="img-thumbnail">
+                    </a>
                   </div>
                   <div class="col-10">
                     <input type="text" readonly class="form-control thumbnail" value="<?php echo old('thumbnail', $oldData) ?>" name="thumbnail" placeholder="Nhập hình ảnh dự án....">

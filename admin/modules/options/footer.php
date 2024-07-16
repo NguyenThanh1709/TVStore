@@ -100,6 +100,9 @@ $msg_style = getFlashData('msg_style');
               <div class="form-group ">
                 <label for="">QR Code</label>
                 <div class="row">
+                  <div class="card ml-2" style="width: 18rem;">
+                    <img src="<?php echo getOptions('footer_qrcode_3') ?>" title="Ảnh đã tải lên" alt="Ảnh tải lên" class="img-thumbnail">
+                  </div>
                   <div class="col-10">
                     <input type="text" readonly class="form-control thumbnail" value="<?php echo getOptions('footer_qrcode_3') ?>" name="footer_qrcode_3" placeholder="Nhập ảnh nền....">
                   </div>
