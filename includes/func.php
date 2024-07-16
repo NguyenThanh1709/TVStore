@@ -298,9 +298,9 @@ function getLinkAdmin($mod, $act = '', $par = [])
   return $url;
 }
 
-function getPaging($page, $module, $queryString, $maxPage)
+function getPaging($page, $module, $queryString, $maxPage, $path = _WEB_HOST_ROOT_ADMIN)
 {
-  $web_host_rooot_admin = _WEB_HOST_ROOT_ADMIN; //Lấy đường dẫn web root
+  $web_host_rooot_admin =  $path; //Lấy đường dẫn web root
   // Chuổi html
   $str = "<nav aria-label='Page navigation example'> 
           <ul class='pagination pagination-sm m-0 p-0'>";

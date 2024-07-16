@@ -1,15 +1,15 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
 
-$data = [
-  'titlePage' => 'Hướng dẫn thanh toán'
-];
-
 $slug = getBody()['slug'];
 
 $sql = "SELECT * FROM `pages` WHERE  `slug` = '$slug'";
 
 $info = firstRaw($sql);
+
+$data = [
+  'titlePage' => $info['title']
+];
 
 layout('header', 'client', $data);
 

@@ -112,8 +112,9 @@
               <!-- Search Form -->
               <div class="search-form active">
                 <a class="icon" href="#"><i class="fa fa-search"></i></a>
-                <form class="form" action="#">
-                  <input placeholder="<?php echo getOptions('general_search_placeholder') ?>" type="search">
+                <form class="form" action="<?php echo _WEB_HOST_ROOT . '?module=search' ?>">
+                  <input type="hidden" name="module" value="search">
+                  <input placeholder="<?php echo getOptions('general_search_placeholder') ?>" value="<?php echo !empty(getBody()['key']) ? getBody()['key'] : false ?>" type="search" name="key">
                 </form>
               </div>
               <!--/ End Search Form -->

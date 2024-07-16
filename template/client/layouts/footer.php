@@ -11,6 +11,9 @@ $contentCol_2 = getOptions('footer_content_2');
 
 $titleCol_3 = getOptions('footer_title_3');
 $contentCol_3 = getOptions('footer_content_3');
+
+//Lấy danh sách trang
+$listPages = getRaw("SELECT * FROM `pages`");
 ?>
 <!-- Footer -->
 <footer id="footer" class="footer wow fadeIn">
@@ -24,7 +27,6 @@ $contentCol_3 = getOptions('footer_content_3');
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-6 col-12">
-
           <!-- About Widget -->
           <div class="single-widget about">
             <h2><?php echo !empty($titleCol_1) ? $titleCol_1 : false ?></h2>

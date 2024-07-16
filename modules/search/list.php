@@ -1,14 +1,23 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-$data = [
-  'titlePage' => getOptions('blogs_title')
-];
-layout('header', 'client', $data);
+if (isGET()) {
+  $body = getBody();
+  if (empty($body['key'])) {
+    redirect(_WEB_HOST_ROOT);
+  } else {
+    $key = $body['key'];
+  }
+}
 
+$data = [
+  'titlePage' => 'Từ khoá: ' . !empty($key) ? $key : false
+];
+
+layout('header', 'client', $data);
 layout('breadcrumbs', 'client', $data);
 
 //Xử lý phân trang
-$allBlogs = getRows("SELECT id FROM blog");
+$allBlogs = getRows("SELECT * FROM `blog` WHERE title LIKE '%$key%'");
 // echo $allBlogs;
 // 1. Xác định số lượng bản ghi 1 trang
 $perPage = _PER_PAGE;
@@ -38,7 +47,7 @@ $offset = ($page - 1) * $perPage;
 $queryString = null;
 if (!empty($_SERVER['QUERY_STRING'])) {
   $queryString = $_SERVER['QUERY_STRING'];
-  $queryString = str_replace('module=blogs', '', $queryString);
+  $queryString = str_replace('module=search', '', $queryString);
   $queryString = str_replace("&page=$page", '', $queryString);
   $queryString = trim($queryString, '&');
   $queryString = '&' . $queryString;
@@ -46,7 +55,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 //Lấy danh sách bài viết
 $listBlogs = getRaw("SELECT `blog`.*, `blog_categories`.name as portfolio_categories_name
-FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categories`.id ORDER BY `create_at` LIMIT $offset, $perPage");
+FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categories`.id WHERE `blog`.title LIKE '%$key%' ORDER BY `create_at` LIMIT $offset, $perPage");
 
 ?>
 <!-- Blogs Area -->
@@ -89,13 +98,13 @@ FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categorie
           <div class="pagination-main">
             <ul class="pagination">
               <?php if ($page > 1) : ?>
-                <li class="prev"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs&action=list&page=' . $page - 1; ?>"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="<?php echo _WEB_HOST_ROOT . '?module=search&key=' . $key . '&page=' . $page - 1; ?>"><i class="fa fa-angle-double-left"></i></a></li>
               <?php endif; ?>
               <?php for ($index = 1; $index <= $maxPage; $index++) : ?>
-                <li class="<?php echo $index == $page ? 'active' : false; ?>"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs&action=list&page=' . $index; ?>"><?php echo $index; ?></a></li>
+                <li class="<?php echo $index == $page ? 'active' : false; ?>"><a href="<?php echo _WEB_HOST_ROOT . '?module=search&key=' . $key . '&page=' . $index; ?>"><?php echo $index; ?></a></li>
               <?php endfor; ?>
               <?php if ($page < $maxPage) : ?>
-                <li class="next"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs&action=list&page=' . $page + 1; ?>"><i class="fa fa-angle-double-right"></i></a></li>
+                <li class="next"><a href="<?php echo _WEB_HOST_ROOT . '?module=search&key=' . $key . '&page=' . $page + 1; ?>"><i class="fa fa-angle-double-right"></i></a></li>
               <?php endif ?>
             </ul>
           </div>
@@ -107,6 +116,9 @@ FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categorie
   </div>
 </section>
 <!--/ End Blogs Area -->
+
 <?php
+require_once _WEB_PATH_ROOT . '/modules/home/contents/partners.php';
+
 layout('footer', 'client', $data);
 ?>
