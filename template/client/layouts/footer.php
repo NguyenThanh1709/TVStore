@@ -71,9 +71,9 @@ $listPages = getRaw("SELECT * FROM `pages`");
             echo html_entity_decode(getOptions('footer_content_4'));
             ?>
             <form>
-              <input placeholder="Your Name" type="text" name="name">
-              <input placeholder="your email" type="email" name="email">
-              <button type="submit" class="button primary"><?php echo getOptions('footer_text_button_4') ?></button>
+              <input placeholder="Tên của bạn là gi?" type="text" name="name">
+              <input placeholder="Email của bạn là gì?" type="email" name="email">
+              <button type="submit" class="button primary btn-subrice"><?php echo getOptions('footer_text_button_4') ?></button>
             </form>
           </div>
           <!--/ End Newsletter Widget -->

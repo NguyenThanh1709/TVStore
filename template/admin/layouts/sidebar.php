@@ -112,6 +112,28 @@ $userDetail = userDetail($userID);
             </li>
           </ul>
         </li>
+        <!-- Register -->
+        <li class="nav-item has-treeview <?php echo activeMenuSidebar('subscribes') ? 'menu-open' : false; ?>">
+          <a href="<?php echo getLinkAdmin('subscribes') ?>" class="nav-link <?php echo activeMenuSidebar('subscribes') ? 'active' : false; ?>">
+            <i class="nav-icon fa fa-registered"></i>
+            <p>
+              Đăng ký
+              <i class="fas fa-angle-left right"></i>
+              <span class="mr-3 badge badge-warning right"><?php echo getSubscribeCountStatus(1) ?></span>
+              <span class="mr-3 badge badge-danger right"><?php echo getSubscribeCountStatus(0) ?></span>
+
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('subscribes') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Danh sách</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- End Register -->
         <!-- End comments -->
         <!-- Portfolio_categories -->
         <li class="nav-item has-treeview <?php echo activeMenuSidebar('portfolio_categories') ? 'menu-open' : false; ?><?php echo activeMenuSidebar('portfolios') ? 'menu-open' : false; ?>">
@@ -272,6 +294,12 @@ $userDetail = userDetail($userID);
               </a>
             </li>
             <li class="nav-item">
+              <a href="<?php echo getLinkAdmin('options', 'menu') ?>" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Thiết lập meunu</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="<?php echo getLinkAdmin('options', 'footer') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Thiết lập footer</p>
@@ -319,6 +347,7 @@ $userDetail = userDetail($userID);
                 <p>Thiết lập trang liên hệ</p>
               </a>
             </li>
+
           </ul>
         </li>
       </ul>

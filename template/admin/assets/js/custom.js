@@ -700,3 +700,38 @@ function callCommentStatus() {
 }
 
 setInterval(callCommentStatus, 15000);
+
+// icon picker options
+var iconPickerOptions = { searchText: "Buscar...", labelHeader: "{0}/{1}" };
+// sortable list options
+var sortableListOptions = {
+  placeholderCss: { "background-color": "#cccccc" },
+};
+var editor = new MenuEditor("myEditor", {
+  listOptions: sortableListOptions,
+  iconPicker: iconPickerOptions,
+  maxLevel: 2, // (Optional) Default is -1 (no level limit)
+  // Valid levels are from [0, 1, 2, 3,...N]
+});
+editor.setForm($("#frmEdit"));
+editor.setUpdateButton($("#btnUpdate"));
+//Calling the update method
+$("#btnUpdate").click(function () {
+  editor.update();
+});
+// Calling the add method
+$("#btnAdd").click(function () {
+  editor.add();
+});
+
+
+editor.setData(arrayJson);
+
+if ($(".btn-save-menu").length > 0) {
+  $(".btn-save-menu").on("click", function (e) {
+    e.preventDefault();
+    var str = editor.getString();
+    $("#menu-content").val(str);
+    $("#frmEdit").submit();
+  });
+}

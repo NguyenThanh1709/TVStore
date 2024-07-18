@@ -51,7 +51,10 @@
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/js/demo.js"></script>
 
-<script src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/js/custom.js"></script>
+
+<script src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/js/bootstrap-iconpicker.min.js"></script>
+
+<script script src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/js/jquery-menu-editor.min.js"></script>
 
 <script type="text/javascript">
   // Lấy giá trị từ hàm PHP và chuyển đổi sang JSON để đảm bảo rằng chuỗi kết quả đúng định dạng
@@ -59,6 +62,8 @@
   var perFix = <?php echo json_encode(_WEB_HOST_ROOT . '/'); ?>;
   // console.log(perFix + getModule);
 </script>
+
+<script src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/js/custom.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,9 @@
+<?php
+$menuJson = html_entity_decode(getOptions('header_menu'));
+if (!empty($menuJson)) {
+  $menuArray = json_decode($menuJson, true);
+}
+?>
 <!DOCTYPE html>
 <html class="no-js" lang="zxx">
 
@@ -163,7 +169,7 @@
             <!-- Main Menu -->
             <div class="mainmenu">
               <nav class="navigation">
-                <ul class="nav menu">
+                <!-- <ul class="nav menu">
                   <li class="active"><a href="<?php echo _WEB_HOST_ROOT ?>">Trang chủ</a></li>
                   <li><a href="#">Trang<i class="fa fa-caret-down"></i></a>
                     <ul class="dropdown">
@@ -173,14 +179,11 @@
                   </li>
                   <li><a href="?module=services">Dịch vụ</a></li>
                   <li><a href="?module=portfolios">Dự án</a></li>
-                  <li><a href="?module=blogs">Bài viết</a>
-                    <!-- <ul class="dropdown">
-                      <li><a href="blog.html">Blog layout</a></li>
-                      <li><a href="blog-single.html">Blog Single</a></li>
-                    </ul> -->
-                  </li>
+                  <li><a href="?module=blogs">Bài viết</a> </li>
+
                   <li><a href="?module=page-template&action=contact">Liên hệ</a></li>
-                </ul>
+                </ul> -->
+                <?php getMenu($menuArray); ?>
               </nav>
               <!-- Button -->
               <div class="button">

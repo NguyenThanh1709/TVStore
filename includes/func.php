@@ -520,7 +520,7 @@ function getCommentList($commentData, $parentId)
     echo "</div>";
   }
 }
-
+//Lấy danh sách comment theo danh mục cha
 function getComment($parent_id)
 {
   $comment = firstRaw("SELECT * FROM `comment` WHERE `id` = '$parent_id'");
@@ -529,7 +529,7 @@ function getComment($parent_id)
   }
 }
 
-
+//Lấy danh sách comment đa cấp
 function getCommentReply($commentData, $parent_id, &$result = [])
 {
   if (!empty($commentData)) {
@@ -554,4 +554,39 @@ function getContactType($type_id)
 {
   $sql = "SELECT * FROM `contact_type` WHERE `id`= $type_id";
   return firstRaw($sql);
+}
+
+//Đếm số lượng sub theo trạng thái
+function getSubscribeCountStatus($status)
+{
+  $sql = "SELECT id FROM `subscibe` WHERE `status`= '$status'";
+  return getRows($sql);
+}
+
+//Check email tồn tại hay chưa
+function checkEmailExits($table, $email)
+{
+  $check = getRows("SELECT id FROM $table WHERE `email` = '$email'");
+  if ($check > 0) {
+    return false;
+  }
+  return true;
+}
+
+//Đỗ dữ liệu Menu
+function getMenu($dataMenu, $isSub = false)
+{
+  if (!empty($dataMenu)) {
+    echo ($isSub) ? '<ul class="dropdown">' : '<ul class="nav menu">';
+    foreach ($dataMenu as $key => $item) {
+      echo '<li><a href="' . $item['href'] . '" target="' . $item['target'] . '" title="' . $item['title'] . '">' . $item['text'] . '</a>';
+      //Gọi đệ quy
+      if (!empty($item['children'])) {
+        getMenu($item['children'], true);
+      }
+      echo '</li>';
+    }
+
+    echo '</ul>';
+  }
 }

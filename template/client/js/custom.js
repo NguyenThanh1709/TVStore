@@ -172,4 +172,51 @@ $(document).ready(function () {
       }
     });
   });
+
+  $(document).on("click", ".btn-subrice", function (e) {
+    e.preventDefault();
+    const name = $("input[name=name]").val();
+    const email = $("input[name=email]").val();
+    if (name == "" || email == "") {
+      toastr.options = {
+        closeButton: true,
+        positionClass: "toast-bottom-right", // Vị trí xuất hiện thông báo
+      };
+      return toastr.warning("Vui lòng điền đầy đủ thông tin !", "Thông báo!");
+    }
+    const data = { name: name, email: email };
+    // Gửi dữ liệu qua ajax
+    $.ajax({
+      url: "?module=server&action=footer_subscribe",
+      method: "POST",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        toastr.options = {
+          closeButton: true,
+          positionClass: "toast-bottom-right", // Vị trí xuất hiện thông báo
+        };
+        if (response.status == 200) {
+          $("input[name=name]").val("");
+          $("input[name=email]").val("");
+          return toastr.success("Đã đăng ký thành công!", "Thông báo!");
+        }
+        if (response.status == 409) {
+          return toastr.warning(
+            "Email đã tồn tại trong hệ thống!",
+            "Thông báo!"
+          );
+        }
+        return toastr.danger(
+          "Đã có lỗi xảy ra. Vui lòng thử lại sau!",
+          "Thông báo!"
+        );
+      },
+      error: function (error) {
+        console.error("Error:", error); // Log any error to the console
+        $("#loading").removeClass("spinner-border spinner-border-sm");
+        $("#btn-comment").attr("disabled", false);
+      },
+    });
+  });
 });

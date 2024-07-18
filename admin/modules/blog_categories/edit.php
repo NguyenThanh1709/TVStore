@@ -71,6 +71,12 @@ $msg_style = getFlashData('msg_style');
       <?php echo form_error('name', $error); ?>
     </div>
     <div class="form-group">
+      <label for="">Đường dẫn tĩnh <span id="auto-slug" class="text-info text-13">[Tự động điền]</span></label>
+      <input type="text" class="form-control" value="<?php echo old('slug', $old_data) ?>" name="slug" placeholder="Nhập slug bài viết....">
+      <span>Link: <a href="#" class="text-url"><?php echo _WEB_HOST_ROOT . '/' . old('slug', $old_data) ?></a></span>
+      <?php echo form_error('slug', $error); ?>
+    </div>
+    <div class="form-group">
       <label for="fullname">Người khởi tạo</label>
       <input type="text" readonly class="form-control" value="<?php echo old('fullname', $old_data) ?>" fullname="fullname" id="fullname" placeholder="Nhập tên danh mục bài viết...">
     </div>

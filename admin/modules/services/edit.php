@@ -24,7 +24,7 @@ if (!empty($serviceDetail)) {
 }
 
 
-//Xử lý thêm
+//Xử lý cập nhật
 if (isPost()) {
 
   $dataForm = getBody(); //lấy dữ liệu từ form

@@ -10,7 +10,7 @@ if (isGET()) {
 }
 
 $data = [
-  'titlePage' => 'Từ khoá: ' . !empty($key) ? $key : false
+  'titlePage' => "Từ khoá: $key"
 ];
 
 layout('header', 'client', $data);
@@ -57,10 +57,12 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 $listBlogs = getRaw("SELECT `blog`.*, `blog_categories`.name as portfolio_categories_name
 FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categories`.id WHERE `blog`.title LIKE '%$key%' ORDER BY `create_at` LIMIT $offset, $perPage");
 
+$titleCount = "Đã tìm thấy " . count($listBlogs) . " kết quả";
 ?>
 <!-- Blogs Area -->
 <section class="blogs-main archives section">
   <div class="container">
+    <h3><?php echo !empty($titleCount) ? $titleCount : false; ?></h3>
     <div class="row">
       <!-- Kiểm tra biến $listBlog có dữ liệu hay không -->
       <?php if (!empty($listBlogs)) :
