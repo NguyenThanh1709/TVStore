@@ -29,7 +29,7 @@ $services = getRaw("SELECT * FROM `sevices`");
             <!-- Single Service -->
             <div class="single-service">
               <?php echo html_entity_decode($item['icon']) ?>
-              <h2><a href="?module=services&action=detail&id=<?php echo $item['id']; ?>"><?php echo $item['name'] ?></a></h2>
+              <h2><a href="<?php echo getLinkModule('services',$item['slug']); ?>"><?php echo $item['name'] ?></a></h2>
               <p><?php echo $item['dscription'] ?></p>
             </div>
             <!-- End Single Service -->

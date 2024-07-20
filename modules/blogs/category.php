@@ -29,7 +29,7 @@ $allBlogCat = getRows("SELECT id FROM blog $condition");
 // die($allBlogCat);
 // echo $allBlogCat;
 // 1. Xác định số lượng bản ghi 1 trang
-$perPage = _PER_PAGE;
+$perPage = 1;
 
 // 2. Tính số trang
 $maxPage = ceil($allBlogCat / $perPage);
@@ -84,7 +84,7 @@ FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categorie
               </div>
               <div class="blog-bottom">
                 <div class="blog-inner">
-                  <h4><a href="?module=blogs&action=detail&slug=<?php echo $item['slug'] ?>"><?php echo !empty($item['title']) ? $item['title'] : false ?></a></h4>
+                  <h4><a href="<?php echo getLinkModule('blogs', $item['slug']) ?>"><?php echo !empty($item['title']) ? $item['title'] : false ?></a></h4>
                   <p class="three-lines"><?php echo !empty($item['dscription']) ? $item['dscription'] : false ?></p>
                   <div class="meta">
                     <span><i class="fa fa-bolt"></i><a href="#"><?php echo $item['portfolio_categories_name'] ?></a></span>
@@ -108,13 +108,13 @@ FROM `blog` INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categorie
           <div class="pagination-main">
             <ul class="pagination">
               <?php if ($page > 1) : ?>
-                <li class="prev"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs' . $queryString . '&page=' . $page - 1; ?>"><i class="fa fa-angle-double-left"></i></a></li>
+                <li class="prev"><a href="<?php echo _WEB_HOST_ROOT . '/bai-viet/danh-muc/' . $slug . '/trang-' . $page - 1; ?>"><i class="fa fa-angle-double-left"></i></a></li>
               <?php endif; ?>
               <?php for ($index = 1; $index <= $maxPage; $index++) : ?>
-                <li class="<?php echo $index == $page ? 'active' : false; ?>"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs' . $queryString . '&page=' . $index; ?>"><?php echo $index; ?></a></li>
+                <li class="<?php echo $index == $page ? 'active' : false; ?>"><a href="<?php echo _WEB_HOST_ROOT . '/bai-viet/danh-muc/' . $slug . '/trang-' . $index; ?>"><?php echo $index; ?></a></li>
               <?php endfor; ?>
               <?php if ($page < $maxPage) : ?>
-                <li class="next"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs' . $queryString . '&page=' . $page + 1; ?>"><i class="fa fa-angle-double-right"></i></a></li>
+                <li class="next"><a href="<?php echo _WEB_HOST_ROOT . '/bai-viet/danh-muc/' . $slug . '/trang-' . $page + 1; ?>"><i class="fa fa-angle-double-right"></i></a></li>
               <?php endif ?>
             </ul>
           </div>

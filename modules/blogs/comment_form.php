@@ -18,7 +18,7 @@
         </div>
         <div class="col-lg-6 col-12">
           <div class="form-group">
-            <input type="email" name="email" value="<?php echo !empty($userDetail['email']) ? $userDetail['email'] : false;  ?>" placeholder="Nhập email của bạn..." required="required">
+            <input type="email" name="email" id="email-form" value="<?php echo !empty($userDetail['email']) ? $userDetail['email'] : false;  ?>" placeholder="Nhập email của bạn..." required="required">
           </div>
         </div>
         <div class="col-12">

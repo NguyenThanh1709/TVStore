@@ -196,7 +196,7 @@ $msg_style = getFlashData('msg_style');
                 <td class="align-middle"><a href="?module=blogs&user_id=<?php echo $value['user_id'] ?>"><?php echo $value['fullname'] ?></a></td>
                 <td class="align-middle"><?php echo $value['create_at'] ?></td>
                 <td colspan="3" class="text-center align-middle">
-                  <a href="<?php echo getLinkAdmin('blogs', 'view', ['id' => $value['id']]) ?>" class="btn btn-sm btn-primary mr-2">
+                  <a target="_blank" href="<?php echo getLinkModule('blogs', $value['slug'])  ?>" class="btn btn-sm btn-primary mr-2">
                     <i class="fa fa-eye"></i> Xem</a>
                   <a href="<?php echo getLinkAdmin('blogs', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
                     <i class="fa fa-edit"></i> Sửa</a>

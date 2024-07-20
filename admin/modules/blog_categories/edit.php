@@ -28,6 +28,7 @@ if (isPost()) {
     //Dữ liệu insert
     $dataUpdate = [
       'name' => $body['name'],
+      'slug' => $body['slug']
     ];
 
     $updateStatus = update('blog_categories', $dataUpdate, "`id`='$catBlogID'");
@@ -73,7 +74,7 @@ $msg_style = getFlashData('msg_style');
     <div class="form-group">
       <label for="">Đường dẫn tĩnh <span id="auto-slug" class="text-info text-13">[Tự động điền]</span></label>
       <input type="text" class="form-control" value="<?php echo old('slug', $old_data) ?>" name="slug" placeholder="Nhập slug bài viết....">
-      <span>Link: <a href="#" class="text-url"><?php echo _WEB_HOST_ROOT . '/' . old('slug', $old_data) ?></a></span>
+      <span>Link: <a target="_blank" href="<?php echo getLinkModule('blog_categories', old('slug', $old_data))  ?>" class="text-url"><?php echo getLinkModule('blog_categories', old('slug', $old_data))  ?></a></span>
       <?php echo form_error('slug', $error); ?>
     </div>
     <div class="form-group">

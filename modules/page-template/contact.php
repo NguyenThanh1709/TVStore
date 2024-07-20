@@ -105,7 +105,7 @@ if (isPost()) {
     setFlashData('error', $errors);
     setFlashData('old_data', $body);
   }
-  redirect(_WEB_HOST_ROOT . '?module=page-template&action=contact');
+  redirect(_WEB_HOST_ROOT . '/lien-he.html');
 }
 
 $msg = getFlashData('msg');

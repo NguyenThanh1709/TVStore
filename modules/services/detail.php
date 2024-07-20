@@ -8,8 +8,8 @@ $data['itemParent'] = "<li><a href='" . _WEB_HOST_ROOT . "?module=services&actio
 layout('breadcrumbs', 'client', $data);
 
 if (isGET()) {
-  $id = getBody()['id'];
-  $infoService = firstRaw("SELECT * FROM `sevices` WHERE `id` = '$id'");
+  $slug = getBody()['slug'];
+  $infoService = firstRaw("SELECT * FROM `sevices` WHERE `slug` = '$slug'");
 }
 ?>
 <!-- Services -->

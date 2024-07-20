@@ -16,7 +16,7 @@ if ($check <= 0) {
   redirect(getLinkAdmin("comments"));
 }
 
-$comment = firstRaw("SELECT `comment`.*, `blog`.title as blog_title, `users`.id as user_id, `users`.fullname as user_fullname, `users`.email as user_email, `groups`.name as group_name 
+$comment = firstRaw("SELECT `comment`.*, `blog`.title as blog_title,`blog`.slug as blog_slug, `users`.id as user_id, `users`.fullname as user_fullname, `users`.email as user_email, `groups`.name as group_name 
 FROM `comment` LEFT JOIN `blog` ON `comment`.blog_id = `blog`.id  
 LEFT JOIN `users` ON `comment`.user_id = `users`.id 
 LEFT JOIN `groups` ON `groups`.id = `users`.group_id WHERE `comment`.id = '$id'");
@@ -73,8 +73,9 @@ $msg_style = getFlashData('msg_style');
     ?>
     <?php
     if (!empty($comment['blog_title'])) {
+      $link = getLinkModule('blogs', $comment['blog_slug']);
     ?>
-      <?php echo "<strong>Trả lời bình luận bài viết: </strong>" . "<a href='#' class='d-inline-block mb-3'>" . $comment['blog_title'] . "</a>" ?>
+      <?php echo "<strong>Trả lời bình luận bài viết: </strong>" . "<a target='_blank' href='$link' class='d-inline-block mb-3'>" . $comment['blog_title'] . "</a>" ?>
     <?php
     }
     ?>

@@ -13,7 +13,7 @@ $(document).ready(function () {
       // Lấy dữ liệu từ form
       var data = {
         name: $('input[name="name"]').val(),
-        email: $('input[name="email"]').val(),
+        email: $('#email-form').val(),
         content: $('textarea[name="content"]').val(),
         parent_id: parent_id,
         blog_id: $('input[name="blog_id"]').val(),
@@ -29,7 +29,7 @@ $(document).ready(function () {
         data: data,
         dataType: "json",
         success: function (response) {
-          console.log("Response:", response);
+          // console.log("Response:", response);
           if (response.str != "") {
             setTimeout(function () {
               $("#loading").removeClass("spinner-border spinner-border-sm");
@@ -160,7 +160,7 @@ $(document).ready(function () {
         Swal.showLoading();
         setTimeout(function () {
           window.location.reload();
-        }, 8000);
+        }, 10000);
       },
       willClose: () => {
         clearInterval(timerInterval);

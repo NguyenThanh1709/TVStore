@@ -40,17 +40,17 @@ if (isPost()) {
     $errors['content']['required'] = "Tên không được để trống!";
   }
 
-  $dataInsert = array(
-    'parent_id' => $body['parent_id'],
-    'blog_id' => trim(strip_tags($body['blog_id'])),
-    'user_id' => !empty($userID) ? $userID : NULL,
+  $dataInsert = [
+    'parent_id' => $body['parent_id'] ?? '',
+    'blog_id' => trim(strip_tags($body['blog_id'] ?? '')),
+    'user_id' => !empty($userID) ? $userID : null,
     'content' => trim(strip_tags($body['content'])),
     'status' => $status
-  );
+  ];
 
   if (empty($userID)) {
-    $dataInsert['name'] = trim(strip_tags($body['name']));
-    $dataInsert['email'] = trim(strip_tags($body['email']));
+    $dataInsert['name'] = trim(strip_tags($body['name']) ?? '');
+    $dataInsert['email'] = trim(strip_tags($body['email'] ?? ''));
   }
 
   $insertStatus = insert('comment', $dataInsert);
@@ -91,4 +91,3 @@ if (isPost()) {
     echo json_encode(['status' => false]);
   }
 }
-

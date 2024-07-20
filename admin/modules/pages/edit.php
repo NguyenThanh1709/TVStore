@@ -94,7 +94,6 @@ if (empty($oldData) && !empty($pageDetail)) {
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
 
-$linkUrl = _WEB_HOST_ROOT . '/' . getPremaLink(getBody()['module']) . '/' . old('slug', $oldData) . ".html";
 ?>
 <section class="content">
   <div class="container-fluid">
@@ -117,7 +116,7 @@ $linkUrl = _WEB_HOST_ROOT . '/' . getPremaLink(getBody()['module']) . '/' . old(
               <div class="form-group">
                 <label for="">Đường dẫn tĩnh <span id="auto-slug" class="text-info text-13">[Tự động điền]</span></label>
                 <input type="text" class="form-control" value="<?php echo old('slug', $oldData) ?>" name="slug" placeholder="Nhập slug dịch vụ....">
-                <span>Link: <a href="<?php echo $linkUrl  ?>" class="text-url"><?php echo $linkUrl  ?></a></span>
+                <span>Link: <a target="_blank" href="<?php echo getLinkModule('pages', old('slug', $oldData))  ?>" class="text-url"><?php echo getLinkModule('pages', old('slug', $oldData))  ?></a></span>
                 <?php echo form_error('slug', $error); ?>
               </div>
             </div>

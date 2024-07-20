@@ -1,11 +1,11 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
 
-$id = getBody('get')['id'];
-$infoPortfolio = firstRaw("SELECT `portfolios`.*, `portfolio_categories`.`name` as nameCat FROM `portfolios` INNER JOIN `portfolio_categories` ON `portfolios`.`portfolio_categories_id`=`portfolio_categories`.`id` WHERE `portfolios`.`id`='$id'");
+$slug = getBody('get')['slug'];
+$infoPortfolio = firstRaw("SELECT `portfolios`.*, `portfolio_categories`.`name` as nameCat FROM `portfolios` INNER JOIN `portfolio_categories` ON `portfolios`.`portfolio_categories_id`=`portfolio_categories`.`id` WHERE `portfolios`.`slug`='$slug'");
 
 //Lấy danh sách ảnh dự án
-$listImage = getRaw("SELECT * FROM `portfolio_images` WHERE `portfolio_id`='$id'");
+$listImage = getRaw("SELECT * FROM `portfolio_images` WHERE `id`='$infoPortfolio[id]'");
 
 // var_dump($listImage);
 

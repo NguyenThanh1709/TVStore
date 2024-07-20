@@ -55,7 +55,7 @@ $portfolios = getRaw("SELECT * FROM `portfolios` ORDER BY `create_at`");
                       <img src="<?php echo $item['thumbnail'] ?>" alt="Hình ảnh" />
                     </div>
                     <div class="portfolio-hover">
-                      <h4><a href="<?php echo _WEB_HOST_ROOT . "?module=portfolios&action=detail&id=$item[id]" ?>"><?php echo $item['name'] ?></a></h4>
+                      <h4><a href="<?php echo getLinkModule('portfolios', $item['slug']) ?>"><?php echo $item['name'] ?></a></h4>
                       <p><?php echo $item['dscription'] ?></p>
                       <div class="button">
                         <a class="primary" data-fancybox="gallery" href="<?php echo $item['thumbnail'] ?>"><i class="fa fa-search"></i></a>
@@ -72,7 +72,7 @@ $portfolios = getRaw("SELECT * FROM `portfolios` ORDER BY `create_at`");
           <?php if (empty($isPortfolio)) : ?>
             <div class="col-12">
               <div class="button">
-                <a class="btn primary" href="?module=portfolios&action=list"><?php echo !empty($homePortButton) ? $homePortButton : false; ?></a>
+                <a class="btn primary" href="<?php echo _WEB_HOST_ROOT . '/du-an' ?>"><?php echo !empty($homePortButton) ? $homePortButton : false; ?></a>
               </div>
             </div>
           <?php endif; ?>

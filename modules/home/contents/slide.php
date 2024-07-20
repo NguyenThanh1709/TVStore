@@ -24,7 +24,6 @@ if (!empty($homeSlide)) {
 
 					// die();
 
-
 				?>
 					<!-- Single Slider -->
 					<div class="single-slider <?php echo !empty($classItemSlide) ? $classItemSlide : false; ?>" style="background-image:url('<?php echo $item['slide_bg'] ?>')">
@@ -44,7 +43,7 @@ if (!empty($homeSlide)) {
 										<h1><?php echo !empty($item['title_slider']) ? html_entity_decode($item['title_slider']) : '' ?></h1>
 										<p><?php echo !empty($item['desc_slider']) ? $item['desc_slider'] : '' ?></p>
 										<div class="button">
-											<a href="portfolio-3-column.html" class="btn"><?php echo $item['button_slider'] ?></a>
+											<a href="<?php echo $item['link_slider'] ?>" class="btn"><?php echo $item['button_slider'] ?></a>
 											<a href="<?php echo $item['video_slider'] ?>" class="btn video video-popup mfp-fade"><i class="fa fa-play"></i>Play Now</a>
 										</div>
 									</div>

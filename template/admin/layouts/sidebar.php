@@ -290,19 +290,19 @@ $userDetail = userDetail($userID);
             <li class="nav-item">
               <a href="<?php echo getLinkAdmin('options', 'header') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Thiết lập header</p>
+                <p>Thiết lập Header</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo getLinkAdmin('options', 'menu') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Thiết lập meunu</p>
+                <p>Thiết lập Menu</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="<?php echo getLinkAdmin('options', 'footer') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Thiết lập footer</p>
+                <p>Thiết lập Footer</p>
               </a>
             </li>
             <li class="nav-item">

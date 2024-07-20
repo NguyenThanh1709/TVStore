@@ -218,7 +218,7 @@ $msg_style = getFlashData('msg_style');
                   </span>
 
                 </td>
-                <td class="align-middle"><a target="_blank" href="<?php echo _WEB_HOST_ROOT ?>?module=blogs&action=detail&slug=<?php echo $item['blog_slug'] ?>"><?php echo getLimitText($item['blog_title'], 5) ?></a></td>
+                <td class="align-middle"><a target="_blank" href="<?php echo getLinkModule('blogs', $item['blog_slug']) ?>"><?php echo getLimitText($item['blog_title'], 5) ?></a></td>
                 <td class="align-middle"><?php echo $item['create_at'] ?></td>
                 <td colspan="3" class="text-center align-middle">
                   <a href="<?php echo getLinkAdmin('comments', 'edit', ['id' => $item['id']]) ?>" class="btn btn-sm btn-warning mr-2">
