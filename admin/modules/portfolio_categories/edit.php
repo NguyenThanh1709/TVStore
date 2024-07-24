@@ -1,4 +1,11 @@
 <?php
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
 
 $portfolio_category_id = getBody('get')['id']; //Id service
 

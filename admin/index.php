@@ -12,6 +12,7 @@ require_once '../includes/phpmailer/Exception.php';
 require_once '../includes/permaLink.php';
 require_once '../includes/database.php';
 require_once '../includes/func.php';
+require_once '../includes/permission.php';
 require_once '../includes/session.php';
 
 $module = _MODULE_DEFAULT_ADMIN;

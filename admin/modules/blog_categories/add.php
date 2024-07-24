@@ -1,4 +1,17 @@
 <?php
+
+//Kiểm tra quyền 
+$groupID = getGroupID();
+$permissionData = getPermissionData($groupID);
+
+$checkPermission = checkPermission($permissionData, 'blog_categories', 'add', 'add');
+
+if (!$checkPermission) {
+  setFlashData('msg', 'Bạn không có quyền truy cập vào module này!');
+  setFlashData('msg_style', 'danger');
+  redirect(getLinkAdmin('dashboarh'));
+}
+
 $userID = isLogin()['user_id']; //lấy id user đang login
 //Xử lý thêm
 if (isPost()) {

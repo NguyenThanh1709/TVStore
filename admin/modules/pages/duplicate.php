@@ -1,4 +1,12 @@
 <?php
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 if (!defined('_INCODE')) die('Access Deined...');
 
 $userID = isLogin()['user_id']; //lấy id user đang login

@@ -45,6 +45,7 @@ autoRomoveTokenLogin();
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/plugins/summernote/summernote-bs4.css">
   <!-- Link css style -->
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/css/style.css">
+  
   <script type="text/javascript" src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/ckeditor/ckeditor.js"></script>
   <script type="text/javascript" src="<?php echo _WEB_HOST_TEMPLATE_ADMIN ?>/assets/ckfinder/ckfinder.js"></script>
 

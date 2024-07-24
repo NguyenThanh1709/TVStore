@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
   // Hàm comment dùng để gửi bình luận mới hoặc trả lời bình luận
   function comment(parent_id = "") {
     $("#comments-form").on("submit", function (event) {
@@ -13,7 +15,7 @@ $(document).ready(function () {
       // Lấy dữ liệu từ form
       var data = {
         name: $('input[name="name"]').val(),
-        email: $('#email-form').val(),
+        email: $("#email-form").val(),
         content: $('textarea[name="content"]').val(),
         parent_id: parent_id,
         blog_id: $('input[name="blog_id"]').val(),

@@ -17,7 +17,7 @@ if (!empty(getBody()['slug'])) {
 $data = [
   'titlePage' => $category['name']
 ];
-$data['itemParent'] = "<li><a href='" . _WEB_HOST_ROOT . "?module=blogs'><i class='fa fa-clone'></i>" . getOptions('blogs_title') . "</a></li>";
+$data['itemParent'] = "<li><a href='" . _WEB_HOST_ROOT . "/bai-viet'><i class='fa fa-clone'></i>" . getOptions('blogs_title') . "</a></li>";
 
 layout('header', 'client', $data);
 

@@ -7,6 +7,19 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra quyền 
+$groupID = getGroupID();
+$permissionData = getPermissionData($groupID);
+
+$checkPermission = checkPermission($permissionData, 'blog_categories', 'list', 'list');
+
+if (!$checkPermission) {
+  setFlashData('msg', 'Bạn không có quyền truy cập vào module này!');
+  setFlashData('msg_style', 'danger');
+  redirect(getLinkAdmin('dashboarh'));
+}
+
+
 $userID = isLogin()['user_id']; //lấy id user đang login
 
 $view = 'add.php';
@@ -181,7 +194,7 @@ $msg_style = getFlashData('msg_style');
                           <a href="<?php echo getLinkAdmin('blog_categories', '', ['id' => $item['id'], 'view' => 'edit']) ?>"><?php echo $item['name']; ?> </a>
                           <a href="<?php echo getLinkAdmin('blog_categories', 'duplicate', ['id' => $item['id']]) ?>" class="ml-3 btn btn-sm btn-outline-success p-0 px-1">Nhân bản</a>
                           <p class="m-1"><span class="badge badge-secondary">Dự án còn: <?php echo $item['portfolioCount'] ?></span></p>
-                          
+
                         </td>
                         <td class="align-middle"><a href="?module=blog_categories&user_id=<?php echo $item['user_id'] ?>"><?php echo $item['fullname'] ?></a></td>
                         <td class="align-middle"><?php echo $item['create_at']; ?></td>

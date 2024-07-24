@@ -10,9 +10,9 @@ html,body {
   margin: 0;
 }
 body {
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Roboto", sans-serif;
 	font-size: 14px;
-    line-height: 24px;
+  line-height: 24px;
 	font-weight:400;
 	color:#333;
 	position:relative;

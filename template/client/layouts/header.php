@@ -9,7 +9,7 @@ if (!empty($menuJson)) {
 
 <head>
   <!-- Meta tag -->
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="Radix" content="Responsive Multipurpose Business Template">
   <meta name='copyright' content='Radix'>
@@ -27,7 +27,7 @@ if (!empty($menuJson)) {
     <link rel="icon" type="image/png" href="<?php echo $favicon ?>">
   <?php } ?>
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
   <!-- Bootstrap Css -->
   <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATE ?>/css/bootstrap.min.css">

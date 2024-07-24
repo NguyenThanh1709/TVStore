@@ -1,4 +1,13 @@
 <?php
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
+
 if (!defined('_INCODE')) die('Access Deined...');
 // var_dump(_INCODE);
 $data = [

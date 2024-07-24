@@ -8,6 +8,15 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
+
 $userID = isLogin()['user_id'];
 // ---- Dữ liệu hiển thị ở SELECT OPTION -----///
 // Lấy danh sách Users
@@ -15,9 +24,7 @@ $listUsers = getRaw("SELECT id, fullname, email FROM `users` WHERE `status` = 1 
 
 // Lấy danh sách danh mục
 $listPortfliosCategories = getRaw("SELECT `id`, `name` FROM `portfolio_categories`");
-// echo "<pre>";
-// print_r($listPortfliosCategories);
-// echo "</pre>";
+
 
 // ---------- end ------------------
 // Xử lý lọc, tìm kiếm

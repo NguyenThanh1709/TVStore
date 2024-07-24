@@ -1,4 +1,16 @@
 <?php
+//Kiểm tra quyền 
+$groupID = getGroupID();
+$permissionData = getPermissionData($groupID);
+
+$checkPermission = checkPermission($permissionData, 'blog_categories', 'edit', 'edit');
+
+if (!$checkPermission) {
+  setFlashData('msg', 'Bạn không có quyền truy cập vào module này!');
+  setFlashData('msg_style', 'danger');
+  redirect(getLinkAdmin('dashboarh'));
+}
+
 
 $catBlogID = getBody('get')['id']; //Id service
 

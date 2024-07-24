@@ -76,7 +76,7 @@ $titleCount = "Đã tìm thấy " . count($listBlogs) . " kết quả";
               </div>
               <div class="blog-bottom">
                 <div class="blog-inner">
-                  <h4><a href="?module=blogs&action=detail&slug=<?php echo $item['slug'] ?>"><?php echo !empty($item['title']) ? $item['title'] : false ?></a></h4>
+                  <h4><a href="<?php echo getLinkModule('blogs', $item['slug']) ?>"><?php echo !empty($item['title']) ? $item['title'] : false ?></a></h4>
                   <p class="three-lines"><?php echo !empty($item['dscription']) ? $item['dscription'] : false ?></p>
                   <div class="meta">
                     <span><i class="fa fa-bolt"></i><a href="#"><?php echo $item['portfolio_categories_name'] ?></a></span>

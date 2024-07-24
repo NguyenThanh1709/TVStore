@@ -1,4 +1,16 @@
 <?php
+//Kiểm tra quyền 
+$groupID = getGroupID();
+$permissionData = getPermissionData($groupID);
+
+$checkPermission = checkPermission($permissionData, 'blog_categories', 'delete', 'delete');
+
+if (!$checkPermission) {
+  setFlashData('msg', 'Bạn không có quyền truy cập vào module này!');
+  setFlashData('msg_style', 'danger');
+  redirect(getLinkAdmin('dashboarh'));
+}
+
 if (!defined('_INCODE')) die('Access Deined...');
 
 $body = getBody();

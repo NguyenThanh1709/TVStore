@@ -28,6 +28,7 @@ if (isPost()) {
       $passwordHash = $userQuery['password'];
       // echo $passwordHash . "<br>";
       $user_id = $userQuery['id'];
+      $group_id = $userQuery['group_id'];
       // echo $user_id;
       if (password_verify($password, $passwordHash)) {  //kiểm tra $password (lấy ở form), $passwordHash (CSDL)
         //Tạo token login
@@ -35,6 +36,7 @@ if (isPost()) {
         //Insert dữ liệu vào bảng login_token
         $dataToken = [
           'user_id' => $user_id,
+          'group_id' => $group_id,
           'token' => $tokenLogin
         ];
         $insertTokenStatus = insert('login_token', $dataToken);

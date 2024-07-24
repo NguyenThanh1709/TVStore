@@ -1,4 +1,21 @@
 // File js
+//Xử lý check permission
+$(document).ready(function () {
+
+  $(".permission_list").on("change", 'input[type="checkbox"]', function () {
+
+    let value = $(this).val();
+
+   
+    if (value === "edit" || value === "delete" || value === "duplicate") {
+      // Tìm checkbox có value là add
+      $(this)
+        .closest("tr")
+        .find('input[type="checkbox"][value="list"]')
+        .prop("checked", true);
+    }
+  });
+});
 
 // Duyệt bình luận noti
 $(document).ready(function () {
@@ -723,7 +740,6 @@ $("#btnUpdate").click(function () {
 $("#btnAdd").click(function () {
   editor.add();
 });
-
 
 editor.setData(arrayJson);
 

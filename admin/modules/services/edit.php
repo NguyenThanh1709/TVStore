@@ -1,6 +1,15 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-// var_dump(_INCODE);
+
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
+
 $data = [
   'pageTitle' => 'Cập nhật dịch vụ'
 ];
@@ -8,6 +17,7 @@ $data = [
 layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
+
 
 $userID = isLogin()['user_id']; //lấy id user đang login
 

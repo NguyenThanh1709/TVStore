@@ -6,6 +6,14 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 //Xử lý tìm kiếm
 $filter = "";
 if (isGET()) {
@@ -103,7 +111,7 @@ $msg_style = getFlashData('msg_style');
                   <th scope="row"><?php echo ++$temp ?></th>
                   <td><a href="<?php echo getLinkAdmin('groups', 'edit', ['id' => $value['id']]) ?>"><?php echo $value['name'] ?></a></td>
                   <td><?php echo $value['create_at'] ?></td>
-                  <td class="text-center btn "><a href="btn" class="btn btn-sm btn-outline-primary"><i class="fa fa-users"></i> Phân quyền</a></td>
+                  <td class="text-center btn "><a href="<?php echo getLinkAdmin('groups', 'permission', ['id' => $value['id']]) ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-users"></i> Phân quyền</a></td>
                   <td colspan="2" class="text-center">
                     <a href="<?php echo getLinkAdmin('groups', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
                       <i class="fa fa-edit"></i> Sửa</a>

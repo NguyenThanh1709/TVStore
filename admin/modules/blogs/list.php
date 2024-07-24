@@ -8,6 +8,14 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 $userID = isLogin()['user_id'];
 // ---- Dữ liệu hiển thị ở SELECT OPTION -----///
 // Lấy danh sách Users

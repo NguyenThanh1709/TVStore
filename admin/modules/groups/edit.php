@@ -6,6 +6,13 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
 
 $groupID = getBody('get')['id'];
 $groupsDetail = firstRaw("SELECT * FROM `groups` WHERE `id`='$groupID'");

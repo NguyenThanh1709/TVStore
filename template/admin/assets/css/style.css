@@ -6,6 +6,11 @@
   font-size: 13px;
 }
 
+/* Hover */
+.hover {
+  cursor: pointer;
+}
+
 /* Menu tài khoản admin */
 .dropdown-menu-lg {
   max-width: 300px;

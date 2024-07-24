@@ -1,6 +1,14 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-// var_dump(_INCODE);
+
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 $data = [
   'pageTitle' => 'Danh sách dịch vụ'
 ];
@@ -8,7 +16,6 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
-$userID = isLogin()['user_id'];
 
 // Xử lý lọc, tìm kiếm
 $filter = "";

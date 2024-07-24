@@ -2239,14 +2239,14 @@ Version: 1.0
 	margin-bottom: 0px;
 }
 .blogs-main.archives.single .blog-inner h2 {
-	font-size: 25px;
+	/* font-size: 25px; */
 	margin: 0 0 15px;
 }
 .blogs-main.archives.single .blog-inner h2 a{
 	color:#333;
 }
 .blogs-main.archives.single .blog-inner p {
-	margin-bottom:20px;
+	/* margin-bottom:20px; */
 }
 .blogs-main.archives.single .blog-inner p b{
 	font-weight:700;

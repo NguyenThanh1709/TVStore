@@ -4,6 +4,13 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+function showDataArr($data)
+{
+  echo "<pre>";
+  print_r($data);
+  echo "</pre>";
+}
+
 function is_phoneVN($phone)
 {
   $pattern = "/^(032|033|034|035|036|037|038|039|096|097|098|086|083|084|085|081|082|088
@@ -228,7 +235,7 @@ function isLogin()
   $checkLogin = false;
   if (getSession('loginToken')) {
     $loginToken = getSession('loginToken');
-    $queryToken = firstRaw("SELECT `user_id` FROM `login_token` WHERE `token` = '$loginToken'");
+    $queryToken = firstRaw("SELECT `user_id`,`group_id` FROM `login_token` WHERE `token` = '$loginToken'");
     if (!empty($queryToken)) {
       $checkLogin = $queryToken;
     } else {
@@ -594,3 +601,4 @@ function getMenu($dataMenu, $isSub = false)
     echo '</ul>';
   }
 }
+

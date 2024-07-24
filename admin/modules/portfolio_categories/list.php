@@ -7,6 +7,15 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
+
 $userID = isLogin()['user_id']; //lấy id user đang login
 
 $view = 'add.php';
@@ -181,7 +190,7 @@ $msg_style = getFlashData('msg_style');
                           <a href="<?php echo getLinkAdmin('portfolio_categories', '', ['id' => $item['id'], 'view' => 'edit']) ?>"><?php echo $item['name']; ?> </a>
                           <a href="<?php echo getLinkAdmin('portfolio_categories', 'duplicate', ['id' => $item['id']]) ?>" class="ml-3 btn btn-sm btn-outline-success p-0 px-1">Nhân bản</a>
                           <p class="m-1"><span class="badge badge-secondary">Dự án còn: <?php echo $item['portfolioCount'] ?></span></p>
-                          
+
                         </td>
                         <td class="align-middle"><a href="?module=portfolio_categories&user_id=<?php echo $item['user_id'] ?>"><?php echo $item['fullname'] ?></a></td>
                         <td class="align-middle"><?php echo $item['create_at']; ?></td>

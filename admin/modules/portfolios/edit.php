@@ -9,6 +9,14 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 $userID = isLogin()['user_id']; //lấy id user đang login
 
 $portfolio_id = getBody('get')['id']; //Lấy id dự án
@@ -61,9 +69,7 @@ if (isPost()) {
     $errors['content']['required'] = "Nội dung dự án bắt buộc phải nhập!";
   }
 
-  if (empty(trim($body['video']))) {
-    $errors['video']['required'] = "Video dự án bắt buộc phải nhập!";
-  }
+
 
   //validation gallery
   $galleryArr = isset($body['gallery']) ? $body['gallery'] : [];
@@ -212,7 +218,7 @@ $msg_style = getFlashData('msg_style');
                   if (!empty($listPortfliosCategories)) {
                     foreach ($listPortfliosCategories as $item) {
                   ?>
-                      <option value="<?php echo $item['id'] ?>"><?php echo $item['name']; ?></option>
+                      <option <?php echo (old('portfolio_categories_id', $oldData) == $item['id'] ? "selected" : false) ?> value="<?php echo $item['id'] ?>"><?php echo $item['name']; ?></option>
                   <?php
                     }
                   }

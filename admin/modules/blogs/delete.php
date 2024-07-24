@@ -1,6 +1,14 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
 
+//Kiểm tra phân quyền
+
+$checkPermission = checkCurrentPermission();
+
+if (!$checkPermission) {
+  redirectPermission();
+}
+
 $body = getBody();
 if (!empty($body['id'])) {
   $blogID = $body['id'];

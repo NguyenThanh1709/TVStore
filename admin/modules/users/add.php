@@ -1,6 +1,6 @@
 <?php
 if (!defined('_INCODE')) die('Access Deined...');
-// var_dump(_INCODE);
+
 $data = [
   'pageTitle' => 'Thêm mới người dùng'
 ];

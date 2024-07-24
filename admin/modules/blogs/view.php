@@ -9,6 +9,18 @@ layout('header', 'admin', $data); //Requide header, sidabar, breadcrumb
 layout('sidebar', 'admin', $data);
 layout('breadcrumb', 'admin', $data);
 
+//Kiểm tra quyền 
+$groupID = getGroupID();
+$permissionData = getPermissionData($groupID);
+
+$checkPermission = checkPermission($permissionData, 'blogs', 'view', 'view');
+
+if (!$checkPermission) {
+  setFlashData('msg', 'Bạn không có quyền truy cập vào module này!');
+  setFlashData('msg_style', 'danger');
+  redirect(getLinkAdmin('dashboarh'));
+}
+
 $userID = isLogin()['user_id']; //lấy id user đang login
 
 if (!empty(getBody('get')['id'])) {

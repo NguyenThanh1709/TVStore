@@ -40,8 +40,8 @@ $allBlogs = getRaw("SELECT * FROM `blog` ORDER BY `create_at`");
 $currentKey = array_search($infoBlog['id'], array_column($allBlogs, 'id'));
 // end 
 
-$parentBreadcrumds = "<li><a href='" . _WEB_HOST_ROOT . "?module=blogs'><i class='fa fa-clone'></i>" . getOptions('blogs_title') . "</a></li>";
-$parentBreadcrumds .= "<li><a href='" . _WEB_HOST_ROOT . "?module=blogs&action=category&slug=$infoBlog[slug_cat]'><i class='fa fa-clone'></i>" . $infoBlog['portfolio_categories_name'] . "</a></li>";
+$parentBreadcrumds = "<li><a href='" . _WEB_HOST_ROOT . "/bai-viet'><i class='fa fa-clone'></i>" . getOptions('blogs_title') . "</a></li>";
+$parentBreadcrumds .= "<li><a href='" . getLinkModule('blog_categories', $infoBlog['slug_cat']) . "'><i class='fa fa-clone'></i>" . $infoBlog['portfolio_categories_name'] . "</a></li>";
 
 $data = [
   'titlePage' => $infoBlog['title'],
@@ -93,10 +93,10 @@ $commentList = getRaw("SELECT * FROM `comment` WHERE `blog_id` = $infoBlog[id] A
                   <!-- Next Prev -->
                   <ul class="arrow">
                     <?php if ($currentKey > 0) : ?>
-                      <li class="prev"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs&action=detail&slug=' . $allBlogs[$currentKey - 1]['slug'] ?>"><i class="fa fa-angle-double-left"></i>Bài trước</a></li>
+                      <li class="prev"><a href="<?php echo getLinkModule('blogs', $allBlogs[$currentKey - 1]['slug'])  ?>"><i class="fa fa-angle-double-left"></i>Bài trước</a></li>
                     <?php endif; ?>
                     <?php if ($currentKey < count($allBlogs) - 1) : ?>
-                      <li class="next"><a href="<?php echo _WEB_HOST_ROOT . '?module=blogs&action=detail&slug=' . $allBlogs[$currentKey + 1]['slug'] ?>">Bài sau<i class="fa fa-angle-double-right"></i></a></li>
+                      <li class="next"><a href="<?php echo getLinkModule('blogs', $allBlogs[$currentKey + 1]['slug']) ?>">Bài sau<i class="fa fa-angle-double-right"></i></a></li>
                     <?php endif; ?>
                   </ul>
                   <!--/ End Next Prev -->
