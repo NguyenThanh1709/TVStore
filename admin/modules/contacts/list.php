@@ -121,6 +121,9 @@ FROM `contacts` INNER JOIN `contact_type` ON `contacts`.type_id = `contact_type`
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
 
+//Check từng chức năng
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 ?>
 
 <div class="container-fluid">
@@ -206,10 +209,14 @@ $msg_style = getFlashData('msg_style');
                 </td>
                 <td class="align-middle"><?php echo $value['create_at'] ?></td>
                 <td colspan="2" class="text-center align-middle">
-                  <a href="<?php echo getLinkAdmin('contacts', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
-                    <i class="fa fa-edit"></i> Sửa</a>
-                  <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('contacts', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
-                    <i class="fa fa-trash"></i> Xoá</a>
+                  <?php if ($checkRoleEdit) : ?>
+                    <a href="<?php echo getLinkAdmin('contacts', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
+                      <i class="fa fa-edit"></i> Sửa</a>
+                  <?php endif; ?>
+                  <?php if ($checkRoleDelete) : ?>
+                    <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('contacts', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
+                      <i class="fa fa-trash"></i> Xoá</a>
+                  <?php endif; ?>
                 </td>
               </tr>
             <?php

@@ -111,12 +111,15 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 // Lấy danh sách Users
 $listUsers = getRaw("SELECT id, fullname, email FROM `users` WHERE `status` = 1 ORDER BY `fullname`");
 
-
 $error = getFlashData('error');
 $old_data = getFlashData('old_data');
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
 
+//Check từng chức năng
+$checkRoleAdd = checkCurrentPermission('add');
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 ?>
 
 <!-- Main content -->
@@ -194,15 +197,18 @@ $msg_style = getFlashData('msg_style');
                           <a href="<?php echo getLinkAdmin('blog_categories', '', ['id' => $item['id'], 'view' => 'edit']) ?>"><?php echo $item['name']; ?> </a>
                           <a href="<?php echo getLinkAdmin('blog_categories', 'duplicate', ['id' => $item['id']]) ?>" class="ml-3 btn btn-sm btn-outline-success p-0 px-1">Nhân bản</a>
                           <p class="m-1"><span class="badge badge-secondary">Dự án còn: <?php echo $item['portfolioCount'] ?></span></p>
-
                         </td>
                         <td class="align-middle"><a href="?module=blog_categories&user_id=<?php echo $item['user_id'] ?>"><?php echo $item['fullname'] ?></a></td>
                         <td class="align-middle"><?php echo $item['create_at']; ?></td>
                         <td colspan="2" class="text-center align-middle">
-                          <a href="<?php echo getLinkAdmin('blog_categories', '', ['id' => $item['id'], 'view' => 'edit']) ?>" class="btn btn-sm btn-warning mr-2">
-                            <i class="fa fa-edit"></i> Sửa</a>
-                          <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('blog_categories', 'delete', ['id' => $item['id']]) ?>" class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i> Xoá</a>
+                          <?php if ($checkRoleEdit) : ?>
+                            <a href="<?php echo getLinkAdmin('blog_categories', '', ['id' => $item['id'], 'view' => 'edit']) ?>" class="btn btn-sm btn-warning mr-2">
+                              <i class="fa fa-edit"></i> Sửa</a>
+                          <?php endif; ?>
+                          <?php if ($checkRoleDelete) : ?>
+                            <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('blog_categories', 'delete', ['id' => $item['id']]) ?>" class="btn btn-sm btn-danger">
+                              <i class="fa fa-trash"></i> Xoá</a>
+                          <?php endif; ?>
                         </td>
                       </tr>
                     <?php endforeach;

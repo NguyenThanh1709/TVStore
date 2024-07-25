@@ -65,6 +65,11 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
+
+//Check từng chức năng
+$checkRoleAdd = checkCurrentPermission('add');
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 ?>
 
 <!-- Main content -->
@@ -76,7 +81,9 @@ $msg_style = getFlashData('msg_style');
     <div class="card ">
       <div class="card-header ">
         <div class="d-flex algin-items-center justify-content-between">
-          <a href="<?php echo getLinkAdmin('groups', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+          <?php if ($checkRoleAdd) : ?>
+            <a href="<?php echo getLinkAdmin('groups', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+          <?php endif; ?>
           <!-- Form search -->
           <form method="GET">
             <input type="hidden" name="module" value="groups">
@@ -113,10 +120,14 @@ $msg_style = getFlashData('msg_style');
                   <td><?php echo $value['create_at'] ?></td>
                   <td class="text-center btn "><a href="<?php echo getLinkAdmin('groups', 'permission', ['id' => $value['id']]) ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-users"></i> Phân quyền</a></td>
                   <td colspan="2" class="text-center">
-                    <a href="<?php echo getLinkAdmin('groups', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
-                      <i class="fa fa-edit"></i> Sửa</a>
-                    <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('groups', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
-                      <i class="fa fa-trash"></i> Xoá</a>
+                    <?php if ($checkRoleEdit) : ?>
+                      <a href="<?php echo getLinkAdmin('groups', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
+                        <i class="fa fa-edit"></i> Sửa</a>
+                    <?php endif; ?>
+                    <?php if ($checkRoleDelete) : ?>
+                      <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('groups', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
+                        <i class="fa fa-trash"></i> Xoá</a>
+                    <?php endif; ?>
                   </td>
                 </tr>
               <?php

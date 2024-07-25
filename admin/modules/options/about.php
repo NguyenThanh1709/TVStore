@@ -23,6 +23,8 @@ $error = getFlashData('errors');
 $oldData = getFlashData('old_data');
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
+
+
 ?>
 <section class="content">
   <div class="container-fluid">

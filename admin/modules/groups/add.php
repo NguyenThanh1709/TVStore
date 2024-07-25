@@ -14,8 +14,6 @@ if (!$checkPermission) {
   redirectPermission();
 }
 
-
-
 $userID = isLogin()['user_id']; //lấy id user đang login
 $userDetail = userDetail($userID);
 setFlashData('userDetail', $userDetail);
@@ -60,6 +58,8 @@ $old_data = getFlashData('old_data');
 $errors = getFlashData('errors');
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
+
+
 ?>
 
 <!-- Main content -->

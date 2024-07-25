@@ -116,13 +116,14 @@ $listPortflios = getRaw("SELECT `portfolios`.*, `users`.fullname, `users`.id as 
 FROM `portfolios` INNER JOIN `users` ON `portfolios`.user_id = `users`.id 
 INNER JOIN `portfolio_categories` ON `portfolios`.portfolio_categories_id = `portfolio_categories`.id $filter ORDER BY `create_at` LIMIT $offset, $perPage");
 
-
-
-
 // echo $queryString;
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
 
+//Check từng chức năng
+$checkRoleAdd = checkCurrentPermission('add');
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 ?>
 
 <div class="container-fluid">
@@ -132,7 +133,9 @@ $msg_style = getFlashData('msg_style');
   <div class="card ">
     <div class="card-header ">
       <div class="d-flex algin-items-center justify-content-between">
-        <a href="<?php echo getLinkAdmin('portfolios', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+        <?php if ($checkRoleAdd) : ?>
+          <a href="<?php echo getLinkAdmin('portfolios', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+        <?php endif ?>
         <!-- Form search -->
         <form method="GET">
           <input type="hidden" name="module" value="portfolios">
@@ -204,10 +207,14 @@ $msg_style = getFlashData('msg_style');
                 <td colspan="3" class="text-center align-middle">
                   <a target="_blank" href="<?php echo getLinkModule('portfolios', $value['slug'])  ?>" class="btn btn-sm btn-primary mr-2">
                     <i class="fa fa-eye"></i> Xem</a>
-                  <a href="<?php echo getLinkAdmin('portfolios', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
-                    <i class="fa fa-edit"></i> Sửa</a>
-                  <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('portfolios', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
-                    <i class="fa fa-trash"></i> Xoá</a>
+                  <?php if ($checkRoleEdit) : ?>
+                    <a href="<?php echo getLinkAdmin('portfolios', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
+                      <i class="fa fa-edit"></i> Sửa</a>
+                  <?php endif; ?>
+                  <?php if ($checkRoleDelete) : ?>
+                    <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('portfolios', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
+                      <i class="fa fa-trash"></i> Xoá</a>
+                  <?php endif; ?>
                 </td>
               </tr>
             <?php

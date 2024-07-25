@@ -113,6 +113,11 @@ $old_data = getFlashData('old_data');
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
 
+
+//Check từng chức năng
+$checkRoleAdd = checkCurrentPermission('add');
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 ?>
 
 <!-- Main content -->

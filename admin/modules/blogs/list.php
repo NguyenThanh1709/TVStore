@@ -114,12 +114,15 @@ $listBlogs = getRaw("SELECT `blog`.*, `users`.fullname, `users`.id as user_id, `
 FROM `blog` INNER JOIN `users` ON `blog`.user_id = `users`.id 
 INNER JOIN `blog_categories` ON `blog`.category_id = `blog_categories`.id $filter ORDER BY `create_at` LIMIT $offset, $perPage");
 
-
-
-
-// echo $queryString;
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
+
+//Check từng chức năng
+$checkRoleAdd = checkCurrentPermission('add');
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
+$checkRoleDuplicate = checkCurrentPermission('duplicate');
+
 
 ?>
 
@@ -130,7 +133,9 @@ $msg_style = getFlashData('msg_style');
   <div class="card ">
     <div class="card-header ">
       <div class="d-flex algin-items-center justify-content-between">
-        <a href="<?php echo getLinkAdmin('blogs', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+        <?php if ($checkRoleAdd) : ?>
+          <a href="<?php echo getLinkAdmin('blogs', 'add') ?>" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Thêm mới</a>
+        <?php endif; ?>
         <!-- Form search -->
         <form method="GET">
           <input type="hidden" name="module" value="blogs">
@@ -195,7 +200,9 @@ $msg_style = getFlashData('msg_style');
                 <td class="align-middle">
                   <a href="<?php echo getLinkAdmin('blogs', 'edit', ['id' => $value['id']]) ?>"><?php echo $value['title'] ?></a>
                   <p>
-                    <a href="<?php echo getLinkAdmin('blogs', 'duplicate', ['id' => $value['id']]) ?>" class="btn btn-sm btn-outline-success p-0 px-1">Nhân bản</a>
+                    <?php if ($checkRoleDuplicate) : ?>
+                      <a href="<?php echo getLinkAdmin('blogs', 'duplicate', ['id' => $value['id']]) ?>" class="btn btn-sm btn-outline-success p-0 px-1">Nhân bản</a>
+                    <?php endif; ?>
                     <span class="btn btn-sm btn-info p-0 px-1"><?php echo $value['view_count'] ?> Lượt xem</span>
                   </p>
 
@@ -206,10 +213,14 @@ $msg_style = getFlashData('msg_style');
                 <td colspan="3" class="text-center align-middle">
                   <a target="_blank" href="<?php echo getLinkModule('blogs', $value['slug'])  ?>" class="btn btn-sm btn-primary mr-2">
                     <i class="fa fa-eye"></i> Xem</a>
-                  <a href="<?php echo getLinkAdmin('blogs', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
-                    <i class="fa fa-edit"></i> Sửa</a>
-                  <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('blogs', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
-                    <i class="fa fa-trash"></i> Xoá</a>
+                  <?php if ($checkRoleEdit) : ?>
+                    <a href="<?php echo getLinkAdmin('blogs', 'edit', ['id' => $value['id']]) ?>" class="btn btn-sm btn-warning mr-2">
+                      <i class="fa fa-edit"></i> Sửa</a>
+                  <?php endif; ?>
+                  <?php if ($checkRoleDelete) : ?>
+                    <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('blogs', 'delete', ['id' => $value['id']]) ?>" class="btn btn-sm btn-danger">
+                      <i class="fa fa-trash"></i> Xoá</a>
+                  <?php endif; ?>
                 </td>
               </tr>
             <?php

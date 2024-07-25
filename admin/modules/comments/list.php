@@ -76,7 +76,6 @@ if (isGET()) {
   }
 }
 
-// echo $filter;
 //Xử lý phân trang
 $allPortlios = getRows("SELECT id FROM comment $filter");
 // echo $allPortlios;
@@ -118,13 +117,12 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 $listComment = getRaw("SELECT `comment`.*, `blog`.title as blog_title, `blog`.slug as blog_slug
 FROM `comment` INNER JOIN `blog` ON `blog`.id = `comment`.blog_id $filter ORDER BY `create_at` DESC LIMIT $offset, $perPage");
 
-// echo "<pre>";
-// print_r($listComment);
-// echo "</pre>";
-
-// echo $queryString;
 $msg = getFlashData('msg');
 $msg_style = getFlashData('msg_style');
+
+//Check từng chức năng
+$checkRoleEdit = checkCurrentPermission('edit');
+$checkRoleDelete = checkCurrentPermission('delete');
 
 ?>
 
@@ -229,10 +227,14 @@ $msg_style = getFlashData('msg_style');
                 <td class="align-middle"><a target="_blank" href="<?php echo getLinkModule('blogs', $item['blog_slug']) ?>"><?php echo getLimitText($item['blog_title'], 5) ?></a></td>
                 <td class="align-middle"><?php echo $item['create_at'] ?></td>
                 <td colspan="3" class="text-center align-middle">
-                  <a href="<?php echo getLinkAdmin('comments', 'edit', ['id' => $item['id']]) ?>" class="btn btn-sm btn-warning mr-2">
-                    <i class="fa fa-edit"></i> Sửa</a>
-                  <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('comments', 'delete', ['id' => $item['id']]) ?>" class="btn btn-sm btn-danger">
-                    <i class="fa fa-trash"></i> Xoá</a>
+                  <?php if ($checkRoleEdit) : ?>
+                    <a href="<?php echo getLinkAdmin('comments', 'edit', ['id' => $item['id']]) ?>" class="btn btn-sm btn-warning mr-2">
+                      <i class="fa fa-edit"></i> Sửa</a>
+                  <?php endif; ?>
+                  <?php if ($checkRoleDelete) : ?>
+                    <a onclick="return confirm('Bạn chắc chắn xoá dữ liệu này!')" href="<?php echo getLinkAdmin('comments', 'delete', ['id' => $item['id']]) ?>" class="btn btn-sm btn-danger">
+                      <i class="fa fa-trash"></i> Xoá</a>
+                  <?php endif; ?>
                 </td>
               </tr>
             <?php
